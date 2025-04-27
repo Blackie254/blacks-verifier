@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+    <style>
+        /* ===== BASE RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===== CORE LAYOUT ===== */
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #e0e0e0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ===== VIDEO BACKGROUND ===== */
+        #bgVideo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+            filter: brightness(0.6);
+        }
+
+        /* ===== TRANSPARENT CENTERED CONTAINER ===== */
+        .container {
+            width: 90%;
+            max-width: 500px;
+            padding: 2.5rem;
+            text-align: center;
+            background: rgba(10, 10, 20, 0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(0, 255, 204, 0.7);
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+            backdrop-filter: blur(5px);
+            margin: 1rem;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1 {
+            font-size: 1.8rem;
+            margin: 0 0 1.5rem 0;
+            color: #00ffcc;
+            text-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .url-info {
+            font-size: 0.9rem;
+            color: rgba(0, 255, 204, 0.7);
+            margin: 0.5rem 0 1.5rem 0;
+            text-align: left;
+        }
+
+        /* ===== FORM ELEMENTS ===== */
+        input {
+            width: 100%;
+            padding: 15px 20px;
+            margin: 0 0 1.5rem 0;
+            background: rgba(20, 25, 30, 0.7);
+            border: 2px solid #00ffcc;
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #ff00ff;
+            box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+        }
+
+        input::placeholder {
+            color: rgba(0, 255, 204, 0.5);
+        }
+
+        /* ===== BUTTONS ===== */
+        .deploy-btn {
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #00ffcc;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .deploy-btn:hover {
+            background: rgba(0, 255, 204, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 255, 204, 0.3);
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
+        }
+
+        /* ===== ERROR MESSAGE ===== */
+        .error-message {
+            color: #ff3333;
+            font-size: 0.9rem;
+            margin: -1rem 0 1rem 0;
+            text-align: left;
+            display: none;
+            text-shadow: 0 0 5px rgba(255, 51, 51, 0.5);
+        }
+
+        /* ===== MENU TOGGLE ===== */
+        .menu-toggle {
+            position: fixed;
+            top: 25px;
+            left: 25px;
+            width: 32px;
+            height: 24px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: #00ffcc;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(0, 255, 204, 0.7);
+        }
+
+        .menu-toggle:hover span {
+            background: #ff00ff;
+            box-shadow: 0 0 8px rgba(255, 0, 255, 0.8);
+        }
+
+        /* ===== SIDE MENU ===== */
+        .menu {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: rgba(10, 15, 20, 0.98);
+            transition: all 0.4s ease;
+            z-index: 999;
+            padding-top: 80px;
+            box-shadow: 5px 0 30px rgba(0, 0, 0, 0.7);
+            border-right: 1px solid rgba(0, 255, 204, 0.5);
+        }
+
+        .menu.active {
+            left: 0;
+        }
+
+        .menu ul {
+            list-style: none;
+            padding: 0 25px;
+        }
+
+        .menu ul li {
+            margin: 22px 0;
+        }
+
+        .menu ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid transparent;
+        }
+
+        .menu ul li a:hover {
+            background: rgba(0, 255, 204, 0.15);
+            color: #00ffcc;
+            transform: translateX(10px);
+            border-left: 3px solid #00ffcc;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+            input, .deploy-btn {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop id="bgVideo">
+        <source src="https://files.catbox.moe/e4jcaf.mp4" type="video/mp4">
+    </video>
+
+    <!-- Menu Toggle -->
+    <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Side Menu -->
+    <div class="menu">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Instructions</a></li>
+            <li><a href="https://blacks-mf.onrender.com/" target="_blank">Get Session</a></li>
+            <li><a href="https://whatsapp.com/channel/0029VawxyHxLdQeX3kA96G3N" target="_blank">Follow Our Channel</a></li>
+            <li><a href="https://wa.me/254114283550" target="_blank">Blackie</a></li>
+            <li><a href="https://sofabets.com?ref=67f140187b99daac288b1d14" target="_blank">Make Money</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h1>Enter your Forked Url here</h1>
+        
+        <input type="text" id="repoUrl" placeholder="Enter Forked Repo URL">
+        <div class="url-info">Example: https://github.com/yourusername/black-super-bot</div>
+        <div class="error-message" id="errorMessage"></div>
+        
+        <button class="deploy-btn" id="deployBtn">DEPLOY</button>
+    </div>
+
+    <script>
+        // Menu toggle functionality
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.menu').classList.toggle('active');
+        });
+
+        // Deploy button functionality
+        document.getElementById('deployBtn').addEventListener('click', function() {
+            const repoUrl = document.getElementById('repoUrl').value.trim();
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Reset error state
+            errorMessage.style.display = 'none';
+            document.getElementById('repoUrl').style.borderColor = '#00ffcc';
+            
+            // Validate input
+            if (!repoUrl) {
+                errorMessage.textContent = 'This field can\'t be empty';
+                errorMessage.style.display = 'block';
+                document.getElementById('repoUrl').style.borderColor = '#ff3333';
+                return;
+            }
+            
+            // Validate GitHub URL format
+            const githubUrlPattern = /^https:\/\/github\.com\/[a-zA-Z0-9_-]+\/[a-zA-Z0-9_-]+$/;
+            if (!githubUrlPattern.test(repoUrl)) {
+                errorMessage.textContent = 'Please enter a valid GitHub repository URL in format: https://github.com/username/black-super-bot';
+                errorMessage.style.display = 'block';
+                document.getElementById('repoUrl').style.borderColor = '#ff3333';
+                return;
+            }
+            
+            // If validation passes, redirect to Heroku with the template URL
+            window.location.href = https://dashboard.heroku.com/new?template=https://github.com/Blackie254/black-super-bot.git
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.querySelector('.menu');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

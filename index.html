@@ -1,0 +1,190 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fork Verification</title>
+    <style>
+        /* Base Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow-y: auto;
+        }
+
+        /* Video Background */
+        #bgVideo {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        /* Fallback Background */
+        .bg-fallback {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: -2;
+        }
+
+        /* Main Container */
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Profile Image */
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 25px;
+            border: 2px solid #7300ff;
+            display: block;
+        }
+
+        /* Instruction Box */
+        .instructions-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #6a00ff;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        /* Text Styling */
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        /* Instructions List */
+        .instructions-list {
+            list-style-type: none;
+            text-align: left;
+        }
+
+        .instructions-list li {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            line-height: 1.4;
+            position: relative;
+            padding-left: 2em;
+        }
+
+        .instructions-list li strong {
+            position: absolute;
+            left: 0;
+            color: #006eff;
+        }
+
+        /* Continue Button */
+        .continue-btn {
+            display: inline-block;
+            padding: 12px 35px;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #7300ff;
+            border-radius: 30px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 15px;
+            }
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .instructions-box {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Video Background -->
+    <div class="bg-fallback"></div>
+    <video autoplay muted loop id="bgVideo">
+        <source src="https://files.catbox.moe/y2wgqe.mp4" type="video/mp4">
+    </video>
+
+    <div class="container">
+        <img src="https://files.catbox.moe/6vjuby.jpg" alt="Profile" class="profile-img">
+        
+        <h1>Fork Verification</h1>
+        
+        <div class="instructions-box">
+            <h2>Instructions</h2>
+            <ol class="instructions-list">
+                <li><strong>1.</strong> Click on the button below and enter fork interface</li>
+                <li><strong>2.</strong> Add your GitHub username and press fork</li>
+                <li><strong>3.</strong> Wait for the site to validate if you have forked or not</li>
+                <li><strong>4.</strong> The site will generate a deployment link automatically if you've forked the repo</li>
+                <li><strong>5.</strong> Please press on the button "Fork Now" if you haven't forked the repo to access your deployment link</li>
+                <li><strong>6.</strong> Get session on the drop menu by the top left corner</li>
+            </ol>
+        </div>
+        
+        <a href="next.html" class="continue-btn" onclick="callApi(); sendData()">Continue</a>
+
+    
+    </div>
+
+    <script>
+        // Video background handling
+        const video = document.getElementById('bgVideo');
+        
+        const playVideo = () => {
+            video.play().catch(error => {
+                document.querySelector('.bg-fallback').style.background = "#000";
+            });
+        };
+
+        video.muted = true;
+        playVideo();
+        
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) playVideo();
+        });
+    </script>
+</body>
+</html>

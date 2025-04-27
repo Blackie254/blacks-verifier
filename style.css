@@ -1,0 +1,292 @@
+
+/* ===== BASE RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== CORE LAYOUT ===== */
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #e0e0e0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== VIDEO BACKGROUND ===== */
+#bgVideo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+/* ===== TRANSPARENT CENTERED CONTAINER ===== */
+.container {
+    width: 90%;
+    max-width: 500px;
+    padding: 2.5rem;
+    text-align: center;
+    background: rgba(10, 10, 20, 0.3);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 255, 204, 0.7);
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.3);
+    backdrop-filter: blur(5px);
+    margin: 1rem;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1 {
+    font-size: 2.2rem;
+    margin: 0 0 0.5rem 0;
+    color: #00ffcc;
+    text-shadow: 0 0 15px rgba(0, 255, 204, 0.5);
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== FORM ELEMENTS ===== */
+input {
+    width: 100%;
+    padding: 15px 20px;
+    margin: 0 0 1rem 0;
+    background: rgba(20, 25, 30, 0.7);
+    border: 2px solid #00ffcc;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: #ff00ff;
+    box-shadow: 0 0 20px rgba(0, 255, 204, 0.4);
+}
+
+input::placeholder {
+    color: rgba(0, 255, 204, 0.7);
+}
+
+/* ===== BUTTONS ===== */
+button {
+    width: 100%;
+    padding: 15px;
+    margin: 0.5rem 0;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid #00ffcc;
+    border-radius: 10px;
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== ENHANCED TOGGLE MENU ===== */
+.menu-toggle {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    width: 32px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: #00ffcc;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px rgba(0, 255, 204, 0.7);
+}
+
+.menu-toggle:hover span {
+    background: #ff00ff;
+    box-shadow: 0 0 8px rgba(255, 0, 255, 0.8);
+}
+
+/* ===== SIDE MENU WITH COLORS ===== */
+.menu {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    background: rgba(10, 15, 20, 0.98);
+    transition: all 0.4s ease;
+    z-index: 999;
+    padding-top: 80px;
+    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.7);
+    border-right: 1px solid rgba(0, 255, 204, 0.5);
+}
+
+.menu.active {
+    left: 0;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0 25px;
+}
+
+.menu ul li {
+    margin: 22px 0;
+}
+
+.menu ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: block;
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid transparent;
+}
+
+.menu ul li a:hover {
+    background: rgba(0, 255, 204, 0.15);
+    color: #009dff;
+    transform: translateX(10px);
+    border-left: 3px solid #00ffcc;
+}
+
+/* External link arrows */
+.menu ul li a[target="_blank"]::after {
+    content: " ↗";
+    font-size: 0.9em;
+    color: rgba(0, 255, 204, 0.8);
+    margin-left: 5px;
+    transition: all 0.3s ease;
+}
+
+.menu ul li a[target="_blank"]:hover::after {
+    color: #ff00ff;
+    transform: translateX(3px);
+}
+
+/* Special menu link colors */
+.menu ul li a[href^="https://wa.me"],
+.menu ul li a[href^="https://whatsapp.com"] {
+    color: #25D366;
+    border-left: 3px solid rgba(37, 211, 102, 0.3);
+}
+
+.menu ul li a[href^="https://wa.me"]:hover,
+.menu ul li a[href^="https://whatsapp.com"]:hover {
+    background: rgba(37, 211, 102, 0.15);
+    border-left: 3px solid #25D366;
+}
+
+.menu ul li a[href^="https://jiod"] {
+    color: #00ccff;
+    border-left: 3px solid rgba(0, 204, 255, 0.3);
+}
+
+.menu ul li a[href^="https://jiod"]:hover {
+    background: rgba(0, 204, 255, 0.15);
+    border-left: 3px solid #00ccff;
+}
+
+/* ===== STATUS MESSAGE COLORS ===== */
+.status-message {
+    padding: 1.25rem;
+    margin: 1.25rem 0;
+    border-radius: 10px;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.status-success {
+    background: rgba(0, 255, 204, 0.1);
+    border: 1px solid #00ffcc;
+    color: #00ffcc;
+}
+
+.status-warning {
+    background: rgba(255, 204, 0, 0.1);
+    border: 1px solid #ffcc00;
+    color: #ffcc00;
+}
+
+.status-error {
+    background: rgba(255, 51, 51, 0.1);
+    border: 1px solid #ff3333;
+    color: #ff3333;
+}
+
+.status-info {
+    background: rgba(51, 153, 255, 0.1);
+    border: 1px solid #3399ff;
+    color: #3399ff;
+}
+
+/* Example status message structure in HTML:
+<div class="status-message status-success">
+    Repository up-to-date. Redirecting to Heroku...
+</div>
+*/
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .container {
+        padding: 2rem;
+    }
+    h1 {
+        font-size: 1.8rem;
+    }
+    .menu {
+        width: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+    }
+    h1 {
+        font-size: 1.6rem;
+    }
+    input, button {
+        padding: 12px 15px;
+    }
+    .menu {
+        width: 220px;
+        padding-top: 70px;
+    }
+    .menu-toggle {
+        top: 20px;
+        left: 20px;
+        width: 28px;
+    }
+    }

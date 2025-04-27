@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLACKMACHANT-MD</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Video Background -->
+    <video autoplay muted loop id="bgVideo">
+        <source src="https://files.catbox.moe/t2f7qm.mp4" type="video/mp4">
+    </video>
+
+    <!-- Menu Toggle -->
+    <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Side Menu -->
+    <div class="menu">
+        <ul>
+            <li><a href="#" id="homeLink">Home</a></li>
+            <li><a href="#" id="instructionsLink">Instructions</a></li>
+            <li><a href="https://blacks-mf.onrender.com" target="_blank">Get Session</a></li>
+            <li><a href="https://whatsapp.com/channel/0029VawxyHxLdQeX3kA96G3N" target="_blank">Follow Our Channel</a></li>
+            <li><a href="https://wa.me/254114283550" target="_blank">Blackie</a></li>
+            <li><a href="https://sofabets.com?ref=67f140187b99daac288b1d14" target="_blank">Make money</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h1>BLACKMACHANT-MD</h1>
+        <p>𝑩𝑳𝑨𝑪𝑲𝑺  𝑰𝑵𝑺𝑻𝑨𝑵𝑻 𝑫𝑬𝑷𝑳𝑶𝒀𝑴𝑬𝑵𝑻</p>
+        
+        <div id="step1">
+            <input type="text" id="githubUsername" placeholder="Your GitHub username">
+            <button id="checkForkBtn">𝑹𝒆𝒑𝒐 𝑺𝒕𝒂𝒕𝒖𝒔</button>
+        </div>
+        
+        <!-- In your index.html file, add this button inside the #step2 div -->
+<div id="step2" style="display: none;">
+    <div id="forkStatus"></div>
+    <button id="forkNowBtn" style="display: none;">Fork</button>
+    <button id="syncRepoBtn" style="display: none;">Sync Fork</button>
+    <button id="deployNowBtn" style="display: none;">Deploy to Heroku</button>
+    <button id="option2Btn" onclick="window.location.href='option2.html'">Use Forked URL</button>
+</div>
+        
+        <div id="message"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
